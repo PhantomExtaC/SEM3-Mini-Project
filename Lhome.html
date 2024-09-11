@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casca</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" type="x-icon" href="img/favicon4.png">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+</head>
+<body>
+    <nav>
+        <div class="logo-container">
+            <img src="img/favicon5.png" alt="Logo" width="50" height="50">
+            <h2 class="logo">Casca</h2>
+        </div>
+        <ul>
+            <li class="active"><a href="Lhome.html">Home</a></li>
+            <li><a href="listings.html">Listings</a></li>
+            <li><a href="#">Tickets</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="login"><a href="login.html">Login</a></button>
+    </nav>
+    <div class="navfix"> 
+        <div class="form-container">
+            <div class="form-box">
+                <h2>List a Property</h2>
+                <form id="propertyForm">
+                    <div class="input-box">
+                        <input type="text" class="input-field" id="name" placeholder="Property Name" required>
+                    </div>
+                    <div class="input-box">
+                        <input type="number" class="input-field" id="space" placeholder="Property Space (sq ft)" required>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" class="input-field" id="type" placeholder="Type (e.g., BHK, HK)" required>
+                    </div>
+                    <div class="input-box">
+                        <select id="gender" name="gender" class="input-field" required>
+                            <option value="boys">Boys Only</option>
+                            <option value="girls">Girls Only</option>
+                            <option value="na">N/A</option>
+                        </select>
+                    </div>
+                    <div class="input-box">
+                        <select id="food" name="food" class="input-field" required>
+                            <option value="veg">Veg</option>
+                            <option value="non-veg">Non-Veg</option>
+                            <option value="vegan">Vegan</option>
+                        </select>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" class="input-field" id="photos" placeholder="Photos (URL)" required>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" class="input-field" id="address" placeholder="Address" required>
+                    </div>
+                    <div class="input-box">
+                        <input type="number" class="input-field" id="people" placeholder="Number of People" required>
+                    </div>
+                    <div class="input-submit">
+                        <button type="submit" class="submit-btn" id="submit"></button>
+                        <label for="submit">Submit</label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
