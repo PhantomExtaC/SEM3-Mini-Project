@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casca - Login</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" type="x-icon" href="img/favicon4.png">
+    <style>
+        .submit-btn{
+            color: #ffffff;
+            font-family: 'Lato';
+            font-size: 1.5rem;
+        }
+        .input-submit {
+            position: relative;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo-container">
+            <img src="img/favicon5.png" alt="Logo" width="50" height="50">
+            <h2 class="logo">Casca</h2>
+        </div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="FAQ.html">FAQ</a></li>
+        </ul>
+        <button class="login act"><a href="login.html">Login</a></button>
+    </nav>
+    <div class="navfix"> 
+        <div class="login-container">
+            <div class="login-box">
+                <h2 class="login-header">Login</h2>
+                <form id="loginForm" action="login.php" method="POST">
+                    <div class="input-box">
+                        <input type="email" class="input-field" name="email" placeholder="Email" autocomplete="off" required>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" class="input-field" name="password" placeholder="Password" autocomplete="off" required>
+                    </div>
+                    <div class="input-submit">
+                        <button type="submit" class="submit-btn">Sign In</button>
+                    </div>
+                    <div class="sign-up-link">
+                        <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

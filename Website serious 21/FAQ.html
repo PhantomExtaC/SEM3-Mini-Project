@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casca</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" type="x-icon" href="img/favicon4.png">
+    <style>
+        
+        .accordion {
+          background-color: #eee;
+          color: #444;
+          cursor: pointer;
+          padding: 18px;
+          width: 100%;
+          border: none;
+          text-align: left;
+          outline: none;
+          font-size: 15px;
+          transition: 0.2s;
+        }
+        
+        .active, .accordion:hover {
+          background-color: #1c86e3;
+          color: aliceblue;
+        }
+        
+        .panel {
+          padding: 0 18px;
+          background-color: white;
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.2s ease-out;
+        }
+
+        .faqqt {
+            font-family: 'Lato';
+            font-size: 2rem;
+        }
+
+        .faqans{
+            font-size: 1.7rem;        
+        }
+
+        
+        </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-container">
+            <img src="img/favicon5.png" alt="Logo" width="50" height="50"> 
+            <h2 class="logo">Casca</h2>
+        </div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li class="active"><a href="FAQ.html">FAQ</a></li>
+        </ul>
+        <button class="login"><a href="login.html">Login</a></button>
+    </nav>
+
+  ​<div class="hero-image hero2">
+      <div class="hero-text">
+          <h1 style="font-size:4.5rem">Frequently Asked Questions</h1>
+      </div>
+  </div> 
+
+    <div class="navfix">
+      
+        <div>           
+        <button class="accordion faqqt">What verification steps are taken for rental properties?</button>
+        <div class="panel faqans">
+          <p>Each property listed on our platform undergoes a thorough inspection by a specialist. They assess essential services, amenities, and the overall condition of the property to ensure tenant safety.</p>
+        </div>
+        
+        <button class="accordion faqqt">Can I search for rentals based on specific requirements?</button>
+        <div class="panel faqans">
+          <p>Yes, you can filter your search based on the type of rental (e.g., number of roommates), food preferences (Veg or Non-Veg), and specific amenities available within the rental.</p>
+        </div>
+        
+        <button class="accordion faqqt">How can tenants raise issues or complaints?</button>
+        <div class="panel faqans">
+          <p>Tenants can easily raise tickets for any issues they encounter, and our team will ensure that these are addressed promptly.</p>
+        </div>
+
+        <button class="accordion faqqt">What benefits do I get as a tenant using Casca?</button>
+        <div class="panel faqans">
+          <p>Tenants using our services will enjoy smooth communication with landlords, access to verified properties, and the ability to raise issues and receive timely updates.</p>
+        </div>
+
+        <button class="accordion faqqt">Are there any fees associated with using Casca?</button>
+        <div class="panel faqans">
+          <p>Registration and searching for properties are free. However, there may be fees for additional services. Please check our pricing section for details.</p>
+        </div>
+    </div>
+
+     </div>
+    
+
+     <script>
+      var acc = document.getElementsByClassName("accordion");
+  
+      function closeAllPanels() {
+          for (var i = 0; i < acc.length; i++) {
+              var panel = acc[i].nextElementSibling;
+              if (acc[i].classList.contains("active")) {
+                  acc[i].classList.remove("active");
+                  panel.style.maxHeight = null;
+              }
+          }
+      }
+  
+      for (var i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function() {
+              var panel = this.nextElementSibling;
+  
+              // Check if the clicked panel is already active
+              if (this.classList.contains("active")) {
+                  // Close the current panel
+                  this.classList.remove("active");
+                  panel.style.maxHeight = null;
+              } else {
+                  // Close all other panels
+                  closeAllPanels();
+  
+                  // Open the current panel
+                  this.classList.toggle("active");
+                  panel.style.maxHeight = panel.scrollHeight + "px";
+              }
+          });
+      }
+  </script>
+  
+      
+   
+</body>
+</html>

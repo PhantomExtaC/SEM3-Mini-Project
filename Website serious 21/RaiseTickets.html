@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raise Tickets - New</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" type="x-icon" href="img/favicon4.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+                
+        
+        
+        .hero-text h1 {
+            font-size: 4rem;
+            text-align: center;
+        }
+
+        .ticket-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 300px); /* Adjust for header height */
+        }
+
+        .ticket-box {
+            background: #fff;
+            width: 440px;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 5px 10px rgba(0,0,0,0.1);
+        }
+
+        .ticket-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .ticket-header header {
+            color: #263147;
+            font-size: 40px;
+            font-weight: 600;
+        }
+
+        .input-box {
+            margin-bottom: 55px;
+        }
+
+        .input-field {
+            width: 100%;
+            height: 300px; /* Increased height for a larger input area */
+            font-size: 17px;
+            padding: 15px;
+            border-radius: 30px;
+            border: 1px solid #ddd;
+            box-shadow: 0px 5px 10px rgba(0,0,0,0.05);
+            outline: none;
+            resize: none; /* Prevent resizing */
+        }
+
+
+        .input-submit {
+            position: relative;
+        }
+
+        .submit-btn {
+            width: 100%;
+            height: 60px;
+            background: #ffa600;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #263147;
+        }
+
+        .input-submit label {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            color: #fff;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+          .ticket-box {
+            background: #fff;
+            width: 500px; /* Adjusted width */
+            padding: 50px; /* Adjusted padding */
+            border-radius: 8px;
+            box-shadow: 0px 5px 10px rgba(0,0,0,0.1);
+            min-height: 300px; /* Set a minimum height */
+            }
+
+            .input-fieldAAA {
+            width: 100%;
+            height: 200px; /* Force height change */
+            font-size: 17px;
+            padding: 15px;
+            border-radius: 30px;
+            border: 1px solid #ddd;
+            box-shadow: 0px 5px 10px rgba(0,0,0,0.05);
+            outline: none;
+            resize: none; /* Prevent resizing */
+            }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo-container">
+            <img src="img/favicon5.png" alt="Logo" width="50" height="50"> 
+            <h2 class="logo">Casca</h2>
+        </div>
+        <ul>
+            <li><a href="Thome.html">Home</a></li>
+            <li class="active"><a href="Raisetickets.html">Raise Tickets</a></li>
+            <li><a href="Pastrent.html">Past Rentals</a></li>
+        </ul>
+        <button class="login"><a href="login.html">Logout</a></button>
+    </nav>
+
+    <div class="hero-image hero3">
+        <div class="hero-text">
+            <h1>Raise Tickets</h1>
+        </div>
+    </div>
+
+    <BR>
+
+    <div class="ticket-container">
+        <div class="ticket-box">
+            <div class="ticket-header">
+                <header>Raise a Ticket</header>
+            </div>
+            <form id="ticketForm">
+                <div class="input-box">
+                    <textarea class="input-fieldAAA" id="description" placeholder="Description" autocomplete="off" required></textarea>
+                </div>
+                <div class="input-submit">
+                    <button type="submit" class="submit-btn" id="submit"></button>
+                    <label for="submit">Submit</label>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

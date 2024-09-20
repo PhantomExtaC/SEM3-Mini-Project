@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casca</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" type="x-icon" href="img/favicon4.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/leaflet-geosearch/dist/geosearch.umd.js"></script>
+    <style>
+        /* General dropdown container */
+        .dropdown-container {
+            position: relative;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        /* Placeholder (toggle button for dropdowns) */
+        .dropdown-toggle {
+            width: 150px;
+            padding: 8px;
+            border: 1px solid #cdcdcd;
+            border-radius: 20px;
+            background-color: #ffffff;
+            font-size: 16px;
+            color: #333333;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .dropdown-toggle:focus {
+            border-color: #1c86e3; /* Change border color to blue on focus */
+            border-width: 1.5px;
+            outline: none; /* Remove default outline */
+        }
+
+        /* Dropdown content hidden by default */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 10px;
+            width: 150px;
+            z-index: 1000;
+        }
+
+        /* Dropdown open */
+        .dropdown-container.open .dropdown-content {
+            display: block;
+        }
+
+        /* Input field inside dropdown (for Type and Roommates) */
+        .dropdown-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #cdcdcd;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Dropdown options (for Gender and Food) */
+        .dropdown-option {
+            padding: 8px;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        .dropdown-option:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* OK button */
+        .ok-button {
+            padding: 8px;
+            width: 100%;
+            background-color: #1c86e3;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .ok-button:hover {
+            background-color: #155ba0;
+        }
+
+        /* White Bar */
+        .white-bar {
+            background-color: #ffffff6e; /* White background with transparency */
+            backdrop-filter: blur(5px); /* Blur effect for the background */
+            padding: 8px 15px; /* Padding for spacing inside the bar */
+            position: fixed; /* Fixes the bar to the top */
+            width: 100%; /* Full width of the viewport */
+            top: 8%; /* Position it just below the navigation bar */
+            left: 0;
+            box-shadow: 0 6px 4px rgba(0, 0, 0, 0.058); /* Subtle shadow for separation */
+            z-index: 999; /* Ensure it is below the navigation bar */
+            display: flex; /* Use flexbox for layout */
+            justify-content: space-between; /* Space between items */
+            align-items: center; /* Vertically center items */
+        }
+
+        .search-container {
+            display: flex; /* Flexbox for search and locate button */
+            align-items: center; /* Center items vertically */
+        }
+
+        .search-bar {
+            width: 300px; /* Adjust width as needed */
+            padding: 8px;
+            padding-left: 20px;
+            border: 1px solid #cdcdcd; /* Light gray border */
+            border-radius: 20px; /* Rounded corners */
+            box-sizing: border-box; /* Include padding and border in the element’s total width */
+            font-size: 20px; /* Font size */
+        }
+
+        .search-bar::placeholder {
+            color: #6c6c6c; /* Placeholder text color */
+        }
+
+        .search-bar:focus {
+            border-color: #1c86e3; /* Blue border on focus */
+            outline: none; /* Remove default outline */
+        }
+
+        .locate-button {
+            margin-left: 10px; /* Adjust as necessary to keep spacing */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo-container">
+            <img src="img/favicon5.png" alt="Logo" width="50" height="50"> 
+            <h2 class="logo">Casca</h2>
+        </div>
+        <ul>
+            <li class="active"><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="FAQ.html">FAQ</a></li>
+        </ul>
+        <button class="login"><a href="login.html">Login</a></button>
+    </nav>
+
+    <!-- White Bar Section -->
+    <div class="white-bar">
+        <div class="search-container">
+            <input type="text" placeholder="Enter Location" class="search-bar" id="search-input">
+            <button id="locate-button" class="locate-button">
+                <img src="img/mark.png" alt="Locate" class="button-icon">
+            </button>
+        </div>
+
+        <div class="dropdowns">
+            <!-- Type Dropdown -->
+            <div class="dropdown-container" id="type-dropdown-container">
+                <input type="text" class="dropdown-toggle" id="type-toggle" placeholder="Type" readonly>
+                <div class="dropdown-content" id="type-dropdown">
+                    <input type="text" id="type-input" class="dropdown-input" placeholder="Enter Type (1-9, B, H, K)" oninput="validateType()">
+                    <button class="ok-button" onclick="selectValue('type')">OK</button>
+                </div>
+            </div>
+
+            <!-- Gender Dropdown -->
+            <div class="dropdown-container" id="gender-dropdown-container">
+                <input type="text" class="dropdown-toggle" id="gender-toggle" placeholder="Gender" readonly>
+                <div class="dropdown-content" id="gender-dropdown">
+                    <div class="dropdown-option" onclick="selectDropdownOption('gender', 'boy')">Boy</div>
+                    <div class="dropdown-option" onclick="selectDropdownOption('gender', 'girl')">Girl</div>
+                    <div class="dropdown-option" onclick="selectDropdownOption('gender', 'na')">NA</div>
+                </div>
+            </div>
+
+            <!-- Food Dropdown -->
+            <div class="dropdown-container" id="food-dropdown-container">
+                <input type="text" class="dropdown-toggle" id="food-toggle" placeholder="Food" readonly>
+                <div class="dropdown-content" id="food-dropdown">
+                    <div class="dropdown-option" onclick="selectDropdownOption('food', 'veg only')">Veg Only</div>
+                    <div class="dropdown-option" onclick="selectDropdownOption('food', 'both')">Both</div>
+                </div>
+            </div>
+
+            <!-- Roommates Dropdown -->
+            <div class="dropdown-container" id="roommates-dropdown-container">
+                <input type="text" class="dropdown-toggle" id="roommates-toggle" placeholder="Roommates" readonly>
+                <div class="dropdown-content" id="roommates-dropdown">
+                    <input type="number" id="roommates-input" class="dropdown-input" placeholder="Enter Roommates (0-15)" oninput="validatePeople()" min="0" max="15">
+                    <button class="ok-button" onclick="selectValue('roommates')">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <div id="map"></div>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+                integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+        <script src="script.js"></script>
+    </main>
+
+    <!-- JavaScript for Dropdowns and Validation -->
+    <script>
+        function validateType() {
+            const typeInput = document.getElementById('type-input');
+            const validChars = /^[BHK1-9]*$/;  // Allow any sequence of B, H, K, and digits 1-9
+            const currentValue = typeInput.value.toUpperCase(); // Get input and force uppercase
+            const cleanedValue = currentValue.replace(/[^BHK1-9]/g, ''); // Remove invalid characters
+
+            // Update the input value with the cleaned version
+            typeInput.value = cleanedValue;
+
+            // Check if the entire value is valid
+            if (!validChars.test(cleanedValue)) {
+                typeInput.setCustomValidity("Please enter valid combinations of digits (1-9) and letters (B, H, K), e.g., '1BHK', 'B2HK'.");
+            } else {
+                typeInput.setCustomValidity(""); // No error
+            }
+        }
+
+        // Roommates validation function
+        function validatePeople() {
+            const peopleInput = document.getElementById('roommates-input');
+            const validPeople = /^(?:[0-9]|1[0-5])$/; // Allow values from 0 to 15
+            peopleInput.value = peopleInput.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+            if (!validPeople.test(peopleInput.value)) {
+                peopleInput.setCustomValidity("Please enter a number between 0 and 15.");
+            } else {
+                peopleInput.setCustomValidity("");
+            }
+        }
+
+        // Function to handle Type and Roommates input submission
+        function selectValue(type) {
+            let input = document.getElementById(type + '-input').value;
+            document.getElementById(type + '-toggle').value = input;
+            closeDropdown(type);
+        }
+
+        // Function to handle selection of Gender and Food options
+        function selectDropdownOption(type, value) {
+            document.getElementById(type + '-toggle').value = value;
+            closeDropdown(type);
+        }
+
+        // Function to close dropdown
+        function closeDropdown(type) {
+            document.getElementById(type + '-dropdown-container').classList.remove('open');
+        }
+
+        // Toggle dropdown visibility on click
+        document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function () {
+                let container = this.parentElement;
+                let isOpen = container.classList.contains('open');
+                // Close all dropdowns
+                document.querySelectorAll('.dropdown-container').forEach(cont => cont.classList.remove('open'));
+                // Open the clicked one
+                if (!isOpen) {
+                    container.classList.add('open');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
